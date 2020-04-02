@@ -1,0 +1,229 @@
+<section class="banner" id="section-{{ section.id }}">
+  <div id="home_banner" class="carousel home_banner" data-ride="carousel">
+    <div class="carousel-inner">
+      {% assign i = 0 %}
+      {% for block in section.blocks %}
+        <div class="carousel-item {% if i == 0 %}active{% endif %}">
+          {% if block.settings.slide_bg_image %}
+          <img class="slider" src="{{ block.settings.slide_bg_image | img_url: 'large' }}" alt="{{ block.settings.slide_bg_image.alt }}">
+          {% else %}
+            <img src="https://via.placeholder.com/241x415" alt="{{ block.settings.slide_bg_image.alt }}">
+            {% endif %}
+          <div class="slider_content">
+            <div class="container">
+              <div class="slider_title color1 fb">{{ block.settings.slide_title }}</div>
+              <div class="slider_sub_title color1 fm">{{ block.settings.slide_sub_title }}</div>
+              <div class="slider_parahgraph fs20 color1">{{ block.settings.slide_brief }}</div>
+            </div>
+          </div>
+        </div>
+      {% assign i = i | plus: 1 %}
+      {% endfor %}
+    </div>
+    <ol class="carousel-indicators">
+      {% assign i = 0 %}
+      {% for block in section.blocks %}
+      <li data-target="#home_banner" data-slide-to="{{i}}" class="{% if i == 0 %}active{% endif %}"></li>
+      {% assign i = i | plus: 1 %}
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+
+<script>
+	$('.carousel').carousel();
+</script>
+
+{% schema %}
+  {
+    "name": "Carousel Slider",
+    "settings": [
+      
+
+	],
+	"blocks":[
+	   {
+          "type": "slider",
+          "name": "Slide",
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "slide_bg_image",
+			  "label": "BG Image",
+			  "info": "Recommended Size: 1920 x 872px"
+			},
+			{
+			  "type": "header",
+			  "content": "Content"
+			},
+			{
+			  "type": "textarea",
+			  "id": "slide_title",
+			  "label": "Title",
+			  "default": "Title"
+			},
+			{
+			  "type": "textarea",
+			  "id": "slide_sub_title",
+			  "label": "Sub Title",
+			  "default": "Sub Title"
+			},
+			{
+			  "type": "textarea",
+			  "id": "slide_brief",
+			  "label": "Brief",
+			  "default": "Slide Brief"
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+
+	"presets": [
+		{
+		  "name": "Carousel Slider",
+		  "category": "1. slider",
+		  "blocks":[
+				{
+					"type": "slider"
+				},
+				{
+					"type": "slider"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
